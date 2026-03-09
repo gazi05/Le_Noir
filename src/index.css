@@ -1,0 +1,23 @@
+@import "tailwindcss";
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  overflow-x: hidden;
+  background: transparent;
+}
+
+/* Optional: if you're on Mac trackpad and want less overscroll feel */
+html, body {
+  overscroll-behavior-y: none;
+}
