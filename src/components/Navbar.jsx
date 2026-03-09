@@ -163,6 +163,7 @@ export default function Navbar() {
             <span>→</span>
           </Link>
           <div className="h-px bg-white/10 my-3" />
+          <a className="text-lg font-serif tracking-wide hover:text-white/80 transition-colors py-3 px-4 hover:bg-white/10 rounded-lg" href="Customize">Customize</a>
           <a href="#About" onClick={handleAboutScroll} className="text-lg font-serif tracking-wide hover:text-white/80 transition-colors py-3 px-4 hover:bg-white/10 rounded-lg">
             About
           </a>
