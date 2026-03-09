@@ -25,13 +25,13 @@ export default function Navbar() {
 
   const handleContactScroll = (e) => {
     e.preventDefault();
-    document.getElementById("Contact")?.scrollIntoView({ behavior: "smooth" });
+    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
     setMobileMenuOpen(false);
   };
 
   const handleAboutScroll = (e) => {
     e.preventDefault();
-    document.getElementById("About")?.scrollIntoView({ behavior: "smooth" });
+    document.getElementById("about")?.scrollIntoView({ behavior: "smooth" });
     setMobileMenuOpen(false);
   };
 
@@ -40,11 +40,11 @@ export default function Navbar() {
 
   // Lock body scroll when mobile menu is open
   useEffect(() => {
-    document.body.style.overflow = mobileMenuOpen ? "hidden" : "unset";
-    return () => { document.body.style.overflow = "unset"; };
+    document.body.style.overflow = mobileMenuOpen ? "hidden" : "auto";
+    return () => { document.body.style.overflow = "auto"; };
   }, [mobileMenuOpen]);
 
-  // Reusable components
+  // NavLink component
   const NavLink = ({ href, onClick, children }) => (
     <a
       href={href}
@@ -60,11 +60,11 @@ export default function Navbar() {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled
-          ? "bg-black/75 backdrop-blur-md   border-white/10 text-white shadow-lg"
-          : "bg-linear-to-b from-black/50 to-transparent text-white"
+          ? "bg-black/75 backdrop-blur-md border-white/10 text-white shadow-lg"
+          : "bg-gradient-to-b from-black/50 to-transparent text-white"
       }`}
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-0 h-16 md:h-20 flex items-center justify-between relative">
+      <div className="mx-auto max-w-7xl px-6 sm:px-0 h-16 md:h-20 flex items-center justify-between relative">
         {/* Mobile Toggle */}
         {isMobile && (
           <button
@@ -77,8 +77,7 @@ export default function Navbar() {
 
         {/* Desktop Nav */}
         {!isMobile && (
-          <div className="flex items-center gap-8 lg:gap-12">
-            <NavLink href="/" onClick={scrollToTop}>Home</NavLink>
+          <div className="flex items-center gap-10 lg:gap-12 -ml-2">
 
             {/* Shop Dropdown */}
             <div 
@@ -96,20 +95,17 @@ export default function Navbar() {
                 shopDropdownOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'
               }`}>
                 <div className="w-56 bg-white/95 backdrop-blur-sm text-gray-900 rounded-2xl shadow-2xl py-2 overflow-hidden border border-white/20">
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-12 h-1 bg-linear-to-r from-gray-400 to-gray-600 rounded-full" />
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-12 h-1 bg-gradient-to-r from-gray-400 to-gray-600 rounded-full" />
                   
                   <Link to="/shop/women" className="flex items-center gap-3 px-6 py-3 text-sm uppercase tracking-wide hover:bg-black hover:text-white transition-all duration-200" onClick={() => setShopDropdownOpen(false)}>
-                    <span>Women</span>
+                    Women
                   </Link>
-                  
 
                   <div className="mx-6 my-1 h-px bg-gray-200" />
 
                   <Link to="/shop/men" className="flex items-center gap-3 px-6 py-3 text-sm uppercase tracking-wide hover:bg-black hover:text-white transition-all duration-200" onClick={() => setShopDropdownOpen(false)}>
-                    <span>Men</span>
+                    Men
                   </Link>
-
-                  
 
                   <div className="mt-2 px-6 py-2 bg-gray-50">
                     <Link to="/shop" className="text-xs uppercase tracking-wider text-gray-600 hover:text-black transition-colors flex items-center justify-between" onClick={() => setShopDropdownOpen(false)}>
@@ -120,9 +116,12 @@ export default function Navbar() {
                 </div>
               </div>
             </div>
-            <NavLink href="Customize">Customize</NavLink>
-            <NavLink href="#About" onClick={handleAboutScroll}>About</NavLink>
-            <NavLink href="#Contact" onClick={handleContactScroll}>Contact</NavLink>
+
+            <Link to="/customize" className="text-xs lg:text-sm font-medium tracking-widest uppercase hover:text-white/80 transition-all duration-300 py-2">
+              Customize
+            </Link>
+            <NavLink href="#about" onClick={handleAboutScroll}>About</NavLink>
+            <NavLink href="#contact" onClick={handleContactScroll}>Contact</NavLink>
           </div>
         )}
 
@@ -131,7 +130,7 @@ export default function Navbar() {
           href="/"
           onClick={scrollToTop}
           className={`${
-            isMobile ? "mx-auto" : "absolute left-180 -translate-x-1/2"
+            isMobile ? "mx-auto" : "absolute left-1/2 -translate-x-1/2"
           } text-xl sm:text-2xl md:text-3xl font-serif tracking-[0.3em] uppercase font-bold hover:text-white/80 transition-all duration-300 cursor-pointer`}
         >
           LE NOIR
@@ -146,12 +145,9 @@ export default function Navbar() {
         </Link>
       </div>
 
-      {/* Mobile Menu - Preserved original style with better spacing */}
+      {/* Mobile Menu */}
       {isMobile && mobileMenuOpen && (
         <div className="bg-black/95 backdrop-blur-lg border-t border-white/10 px-6 py-6 flex flex-col gap-2">
-          <a href="/" onClick={scrollToTop} className="text-lg font-serif tracking-wide hover:text-white/80 transition-colors py-3 px-4 hover:bg-white/10 rounded-lg">
-            Home
-          </a>
           <Link to="/shop/women" onClick={() => setMobileMenuOpen(false)} className="text-lg font-serif tracking-wide hover:text-white/80 transition-colors py-3 px-4 hover:bg-white/10 rounded-lg">
             Women
           </Link>
@@ -163,11 +159,13 @@ export default function Navbar() {
             <span>→</span>
           </Link>
           <div className="h-px bg-white/10 my-3" />
-          <a className="text-lg font-serif tracking-wide hover:text-white/80 transition-colors py-3 px-4 hover:bg-white/10 rounded-lg" href="Customize">Customize</a>
-          <a href="#About" onClick={handleAboutScroll} className="text-lg font-serif tracking-wide hover:text-white/80 transition-colors py-3 px-4 hover:bg-white/10 rounded-lg">
+          <Link to="/customize" onClick={() => setMobileMenuOpen(false)} className="text-lg font-serif tracking-wide hover:text-white/80 transition-colors py-3 px-4 hover:bg-white/10 rounded-lg">
+            Customize
+          </Link>
+          <a href="#about" onClick={handleAboutScroll} className="text-lg font-serif tracking-wide hover:text-white/80 transition-colors py-3 px-4 hover:bg-white/10 rounded-lg">
             About
           </a>
-          <a href="#Contact" onClick={handleContactScroll} className="text-lg font-serif tracking-wide hover:text-white/80 transition-colors py-3 px-4 hover:bg-white/10 rounded-lg">
+          <a href="#contact" onClick={handleContactScroll} className="text-lg font-serif tracking-wide hover:text-white/80 transition-colors py-3 px-4 hover:bg-white/10 rounded-lg">
             Contact
           </a>
         </div>
