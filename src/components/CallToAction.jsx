@@ -63,7 +63,7 @@ export default function DirectContactCTA() {
 
           {/* Email (optional) */}
           <a
-            href="mailto:your@email.com"
+            href="waleed.london24@gmail.com"
             className="flex items-center justify-center gap-3 px-8 py-4 border border-foreground text-sm tracking-widest uppercase hover:bg-foreground hover:text-background transition-all rounded-md"
           >
             <Mail size={18} />

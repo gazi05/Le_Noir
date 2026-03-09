@@ -99,16 +99,14 @@ export default function Navbar() {
                   <div className="absolute top-0 left-1/2 -translate-x-1/2 w-12 h-1 bg-linear-to-r from-gray-400 to-gray-600 rounded-full" />
                   
                   <Link to="/shop/women" className="flex items-center gap-3 px-6 py-3 text-sm uppercase tracking-wide hover:bg-black hover:text-white transition-all duration-200" onClick={() => setShopDropdownOpen(false)}>
-                    <span className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-100">👗</span>
-                    <span>Women's Collection</span>
+                    <span>Women</span>
                   </Link>
                   
 
                   <div className="mx-6 my-1 h-px bg-gray-200" />
 
                   <Link to="/shop/men" className="flex items-center gap-3 px-6 py-3 text-sm uppercase tracking-wide hover:bg-black hover:text-white transition-all duration-200" onClick={() => setShopDropdownOpen(false)}>
-                    <span className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-100">👔</span>
-                    <span>Men's Collection</span>
+                    <span>Men</span>
                   </Link>
 
                   
@@ -154,11 +152,11 @@ export default function Navbar() {
           <a href="/" onClick={scrollToTop} className="text-lg font-serif tracking-wide hover:text-white/80 transition-colors py-3 px-4 hover:bg-white/10 rounded-lg">
             Home
           </a>
-          <Link to="/shop/men" onClick={() => setMobileMenuOpen(false)} className="text-lg font-serif tracking-wide hover:text-white/80 transition-colors py-3 px-4 hover:bg-white/10 rounded-lg">
-            👔 Men's Collection
-          </Link>
           <Link to="/shop/women" onClick={() => setMobileMenuOpen(false)} className="text-lg font-serif tracking-wide hover:text-white/80 transition-colors py-3 px-4 hover:bg-white/10 rounded-lg">
-            👗 Women's Collection
+            Women
+          </Link>
+          <Link to="/shop/men" onClick={() => setMobileMenuOpen(false)} className="text-lg font-serif tracking-wide hover:text-white/80 transition-colors py-3 px-4 hover:bg-white/10 rounded-lg">
+            Men
           </Link>
           <Link to="/shop" onClick={() => setMobileMenuOpen(false)} className="text-lg font-serif tracking-wide hover:text-white/80 transition-colors py-3 px-4 hover:bg-white/10 rounded-lg flex items-center justify-between">
             <span>All Products</span>
