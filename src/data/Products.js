@@ -12,7 +12,6 @@ import navy_satin_dress3 from '../assets/images/navy-satin-dress3.webp';
 import White_cotton_set from "../assets/images/White-cotton-set.webp";
 import White_cotton_set2 from "../assets/images/White-cotton-set2.webp";
 import White_cotton_set3 from "../assets/images/White-cotton-set3.webp";
-import { m } from 'framer-motion';
 
 export const products = [
   { 
@@ -23,11 +22,15 @@ export const products = [
     pantsPrice: 20,
     jacketCode : "3001/021/064",
     pantsCode : "4001/021/064",
-    image: [Beige_Linen_Jacket , Beige_Linen_Jacket2 , Beige_Linen_Jacket3],
+    image: [Beige_Linen_Jacket, Beige_Linen_Jacket2, Beige_Linen_Jacket3],
     category: ["set", "jacket", "pants"],  
     gender: "women",
     color: ["beige"],
-    material: "75% cotton, 25% wool", 
+    material: "75% cotton, 25% wool",
+
+    type: "pants",
+    sizes: ["XS", "S", "M", "L"],
+
     Cleaning: `
       Washing: Prefer hand wash or wool cycle (cold)
       Bleach: Do not bleach
@@ -50,6 +53,10 @@ export const products = [
     gender: "women",
     color: ["saffron"],
     material: "60% cotton, 40% polyester",
+
+    type: "tops",
+    sizes: ["XS", "S", "M", "L"],
+
     Cleaning: ` 
       Washing: 30°C (gentle cycle)
       Bleach: Do not bleach
@@ -68,7 +75,11 @@ export const products = [
     category: ["dress"], 
     gender: "women",
     color: ["navy"],
-    material: "75% cotton, 25% polyester", 
+    material: "75% cotton, 25% polyester",
+
+    type: "tops",
+    sizes: ["XS", "S", "M", "L"],
+
     Cleaning: `
       Washing: 30°C (gentle cycle)
       Bleach: Do not bleach
@@ -90,7 +101,11 @@ export const products = [
     category : ["set" , "jacket" , "pants"] ,  
     gender: "women",
     color: ["white"],
-    material : "30% cotton, 70% polyester", 
+    material : "30% cotton, 70% polyester",
+
+    type: "jackets",
+    sizes: ["XS", "S", "M", "L"],
+
     Cleaning : `
       Washing: 40°C
       Bleach: Allowed with caution (since it’s white)

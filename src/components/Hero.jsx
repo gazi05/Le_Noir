@@ -43,7 +43,7 @@ export default function Hero() {
           whileInView={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          The Earth Collection
+          New Arrival
         </motion.span>
 
         {/* Main heading */}

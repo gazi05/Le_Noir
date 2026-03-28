@@ -1,10 +1,21 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
 const CartContext = createContext();
 
 export function CartProvider({ children }) {
-  const [cart, setCart] = useState([]);
 
+  // ✅ Load cart from localStorage on first load
+  const [cart, setCart] = useState(() => {
+    const savedCart = localStorage.getItem("cart");
+    return savedCart ? JSON.parse(savedCart) : [];
+  });
+
+  // ✅ Save cart to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+
+  // ✅ Add to cart
   const addToCart = (item) => {
     setCart((prev) => {
       const existing = prev.find((i) => i.id === item.id);
@@ -21,10 +32,12 @@ export function CartProvider({ children }) {
     });
   };
 
+  // ✅ Remove
   const removeFromCart = (id) => {
     setCart((prev) => prev.filter((item) => item.id !== id));
   };
 
+  // ✅ Update quantity
   const updateQuantity = (id, quantity) => {
     if (quantity < 1) return;
 
@@ -35,6 +48,7 @@ export function CartProvider({ children }) {
     );
   };
 
+  // ✅ Total items (for navbar)
   const totalItems = cart.reduce(
     (sum, item) => sum + item.quantity,
     0
