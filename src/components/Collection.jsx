@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { useIsMobile } from "../hooks/use-mobile.jsx";
-import { products } from "../data/Products.js";  // ← THIS WAS MISSING!
+import { products } from "../data/Products.js"; 
 
 export default function Collection() {
   const isMobile = useIsMobile();
@@ -101,12 +101,12 @@ export default function Collection() {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5 }}
               >
-                {products.map((product) => (
+               {products.slice(0, 3).map((product) => (
                   <div key={product.id} className="w-full shrink-0 px-2">
-                    <Link to="/shop" className="group block">
+                    <Link to="/shop/women" className="group block">
                       <div className="overflow-hidden rounded-lg">
                         <img
-                          src={product.image}
+                          src={product.image[0]}
                           alt={product.name}
                           loading="lazy"
                           className="w-full h-96 object-cover transition-transform duration-700 group-hover:scale-105 rounded-lg"
@@ -145,7 +145,7 @@ export default function Collection() {
         ) : (
           /* Desktop Grid */
           <div className="grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-12">
-            {products.map((product, index) => (
+            {products.slice(0, 3).map((product, index) => (
               <motion.div
                 key={product.id}
                 initial={{ opacity: 0, y: 30 }}
@@ -153,10 +153,10 @@ export default function Collection() {
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.6, delay: index * 0.2 }}
               >
-                <Link to="/shop" className="group block">
+                <Link to="/shop/women" className="group block">
                   <div className="overflow-hidden rounded-lg">
                     <img
-                      src={product.image}
+                      src={product.image[0]}
                       alt={product.name}
                       loading="lazy"
                       className="w-full h-80 lg:h-96 object-cover transition-transform duration-700 group-hover:scale-105 rounded-lg"

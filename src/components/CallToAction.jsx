@@ -52,7 +52,8 @@ export default function DirectContactCTA() {
           </a>
           {/* Instagram */}
           <a
-            href="https://instagram.com/YOURBRAND"
+            href="https://instagram.com/lenoir.officiall
+"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-center gap-3 px-8 py-4 border border-foreground text-sm tracking-widest uppercase hover:bg-foreground hover:text-background transition-all rounded-md"

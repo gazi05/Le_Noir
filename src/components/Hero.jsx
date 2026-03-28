@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useIsMobile } from "../hooks/use-mobile.jsx";
 
-import heroMobile from "../assets/images/10.webp";
-import heroDesktop from "../assets/images/11.webp";
+import heroMobile from "../assets/images/White-cotton-set.webp";
+import heroDesktop from "../assets/images/White-cotton-set2.webp";
 
 export default function Hero() {
   const isMobile = useIsMobile();
@@ -63,7 +63,7 @@ export default function Hero() {
           transition={{ duration: 1, delay: 0.6 }}
         >
           <Link
-            to="/shop"
+            to="/shop/women"
             className="group inline-flex items-center gap-4 border border-white text-white px-8 py-4 font-medium tracking-widest uppercase transition-all
                        hover:bg-white hover:text-black
                        active:bg-white active:text-black

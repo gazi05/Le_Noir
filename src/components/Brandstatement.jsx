@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import brandImg from "../assets/images/1.webp"; 
+import brandImg from "../assets/images/Beige-Linen-Jacket-Pants.webp"; 
 
 export default function BrandStatement() {
   const fadeSlide = {

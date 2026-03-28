@@ -1,5 +1,5 @@
 import { motion , useInView} from "framer-motion";
-import aboutImg from "../assets/images/Le_Noir1.webp";
+import aboutImg from "../assets/images/saffron-satin-set2.webp";
 
 export default function About() {
 
@@ -32,7 +32,7 @@ export default function About() {
           </span>
 
           <p className="text-lg md:text-xl leading-relaxed text-gray-600">
-            <span className="font-semibold">Le Noir</span> is a contemporary streetwear brand founded in 2022 in Jordan by designer Walid Nasser. Built on the power of black and defined by refined silhouettes, the brand blends elevated design with everyday comfort — delivering premium pieces that speak with confidence, not noise.
+            <span className="font-semibold">Le Noir</span> is a contemporary streetwear brand founded in 2022 in Jordan . Built on the power of black and defined by refined silhouettes, the brand blends elevated design with everyday comfort — delivering premium pieces that speak with confidence, not noise.
           </p>
 
           <p className="text-lg md:text-xl leading-relaxed text-gray-600">
