@@ -17,7 +17,7 @@ export default function ProductCard({ product, onClick }) {
           {product.name}
         </h2>
         <p className="text-sm md:text-base font-semibold text-gray-700">
-          {product.price}
+          {product.price} JD
         </p>
       </div>
     </div>

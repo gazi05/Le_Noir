@@ -3,7 +3,7 @@ import { Instagram, Phone, Mail } from "lucide-react";
 
 export default function DirectContactCTA() {
   return (
-    <section id="Contact" className="py-24 bg-background text-foreground">
+    <section className="py-24 bg-background text-foreground">
       <div className="max-w-5xl mx-auto px-6 text-center flex flex-col items-center gap-8">
 
         {/* Heading */}

@@ -12,14 +12,17 @@ import navy_satin_dress3 from '../assets/images/navy-satin-dress3.webp';
 import White_cotton_set from "../assets/images/White-cotton-set.webp";
 import White_cotton_set2 from "../assets/images/White-cotton-set2.webp";
 import White_cotton_set3 from "../assets/images/White-cotton-set3.webp";
+import { m } from 'framer-motion';
 
 export const products = [
   { 
     id: 1, 
     name: "Beige Linen Set", 
-    price: "60 JOD", 
-    jacketPrice: "40 JOD",
-    pantsPrice: "20 JOD",
+    price: 60, 
+    jacketPrice: 40,
+    pantsPrice: 20,
+    jacketCode : "3001/021/064",
+    pantsCode : "4001/021/064",
     image: [Beige_Linen_Jacket , Beige_Linen_Jacket2 , Beige_Linen_Jacket3],
     category: ["set", "jacket", "pants"],  
     gender: "women",
@@ -37,9 +40,11 @@ export const products = [
   { 
     id: 2, 
     name: "Saffron Satin Set", 
-    price: "55 JOD", 
-    jacketPrice: "30 JOD",
-    pantsPrice: "25 JOD",
+    price: 55,
+    jacketPrice: 30,
+    pantsPrice: 25,
+    jacketCode : "2001/027/044" , 
+    pantsCode : "4001/027/044" , 
     image: [saffron_set , saffron_set2],
     category: ["set" , "jacket" , "pants"],  
     gender: "women",
@@ -57,7 +62,8 @@ export const products = [
   { 
     id: 3, 
     name: "Navy Satin Dress", 
-    price: "40 JOD", 
+    price: 40, 
+    dressCode : "1001/027/054" , 
     image: [navy_satin_dress , navy_satin_dress2 , navy_satin_dress3],
     category: ["dress"], 
     gender: "women",
@@ -75,9 +81,11 @@ export const products = [
   {
     id: 4 , 
     name : "White Cotton Set" ,
-    price : "60 JOD" , 
-    jacketPrice: "35 JOD",
-    pantsPrice: "25 JOD",
+    price : 60 , 
+    jacketPrice: 35,
+    pantsPrice: 25,
+    jacketCode : "1201/033/051" ,
+    pantsCode : "8001/033/051" ,
     image : [White_cotton_set, White_cotton_set2 , White_cotton_set3], 
     category : ["set" , "jacket" , "pants"] ,  
     gender: "women",

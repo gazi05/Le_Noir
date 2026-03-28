@@ -9,9 +9,11 @@ export default function Shop() {
   if (gender === "men") return <MensShop />;
 
   return (
+
     <div className="pt-24 min-h-screen">
       <h1 className="text-4xl text-center">All Products</h1>
-      {/* You can import a component that shows all products */}
+      {
+      }
     </div>
   );
 }

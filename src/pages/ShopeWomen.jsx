@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { products as allProducts } from "../data/Products.js";
 import ProductCard from "../components/ProductCard.jsx";
 import ProductModal from "../components/ProductModal.jsx";
-import Navbar from "../components/Navbar.jsx";
+import Footer from "../components/Footer.jsx";
 
 export default function WomensShop() {
   const [products, setProducts] = useState([]);
@@ -43,7 +43,6 @@ export default function WomensShop() {
 
   return (
     <>
-    <Navbar />
     <div className="pt-24 min-h-screen bg-white text-black">
       <div className="max-w-7xl mx-auto px-4">
         {/* Header */}
@@ -130,6 +129,7 @@ export default function WomensShop() {
         </div>
       )}
     </div>
+    <Footer />
     </>
   );
 }

@@ -11,7 +11,7 @@ export default function About() {
   
   return (
     
-    <section id="About" className="py-20 bg-background text-foreground overflow-hidden">
+    <section className="py-20 bg-background text-foreground overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 flex flex-col-reverse md:flex-row items-center gap-12">
 
         {/* TEXT LEFT */}

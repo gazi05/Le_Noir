@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { X } from "lucide-react";
 import { useCart } from "../context/CartContext";
 
@@ -8,10 +8,27 @@ export default function ProductModal({ product, onClose }) {
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [selectedPart, setSelectedPart] = useState("full");
+  const [showToast, setShowToast] = useState(false);
+
+  const toastTimeout = useRef(null);
 
   const isSet =
     Array.isArray(product.category) &&
     product.category.includes("set");
+
+  const handleAddToCart = (item) => {
+    addToCart(item);
+
+    setShowToast(true);
+
+    if (toastTimeout.current) {
+      clearTimeout(toastTimeout.current);
+    }
+
+    toastTimeout.current = setTimeout(() => {
+      setShowToast(false);
+    }, 2000);
+  };
 
   const getPrice = () => {
     if (selectedPart === "jacket" && product.jacketPrice) {
@@ -23,8 +40,15 @@ export default function ProductModal({ product, onClose }) {
     return product.price;
   };
 
+  const getCode = () => {
+    if (selectedPart === "jacket") return product.jacketCode;
+    if (selectedPart === "pants") return product.pantsCode;
+    return product.dressCode || product.jacketCode;
+  };
+
   return (
     <div className="fixed inset-0 z-50 bg-black/60 flex justify-center items-start overflow-y-auto p-4">
+      
       <div className="bg-white w-full max-w-5xl rounded-2xl shadow-2xl relative">
 
         {/* Close */}
@@ -63,10 +87,22 @@ export default function ProductModal({ product, onClose }) {
           {/* Info */}
           <div className="flex flex-col gap-4">
             <h2 className="text-2xl font-semibold">{product.name}</h2>
-            <p className="text-xl font-bold">{getPrice()}</p>
+
+            {/* Price */}
+            <p className="text-xl font-bold">
+              {getPrice()} JOD
+            </p>
+
+            {/* CODE DISPLAY */}
+            {getCode() && (
+              <p className="text-sm text-gray-500">
+                Code: {getCode()}
+              </p>
+            )}
+
             <p className="text-gray-600">{product.material}</p>
 
-            {/* Set options */}
+            {/* SET OPTIONS */}
             {isSet && (
               <div>
                 <p className="font-medium mb-2">Choose Item:</p>
@@ -78,7 +114,7 @@ export default function ProductModal({ product, onClose }) {
                       selectedPart === "full" ? "bg-black text-white" : ""
                     }`}
                   >
-                    Full Set ({product.price})
+                    Full Set ({product.price} JOD)
                   </button>
 
                   {product.jacketPrice && (
@@ -88,7 +124,7 @@ export default function ProductModal({ product, onClose }) {
                         selectedPart === "jacket" ? "bg-black text-white" : ""
                       }`}
                     >
-                      Jacket ({product.jacketPrice})
+                      Jacket ({product.jacketPrice} JOD)
                     </button>
                   )}
 
@@ -99,14 +135,14 @@ export default function ProductModal({ product, onClose }) {
                         selectedPart === "pants" ? "bg-black text-white" : ""
                       }`}
                     >
-                      Pants ({product.pantsPrice})
+                      Pants ({product.pantsPrice} JOD)
                     </button>
                   )}
                 </div>
               </div>
             )}
 
-            {/* Quantity */}
+            {/* QUANTITY */}
             <div className="flex items-center gap-3">
               <button
                 onClick={() => setQuantity((q) => Math.max(1, q - 1))}
@@ -125,29 +161,31 @@ export default function ProductModal({ product, onClose }) {
               </button>
             </div>
 
-            {/* ADD TO CART ✅ */}
+            {/* ADD TO CART */}
             <button
               onClick={() => {
-              addToCart({
-                id: `${product.id}-${selectedPart}`, // ✅ unique item
-                name:
-                  selectedPart === "jacket"
-                    ? `${product.name} (Jacket)`
-                    : selectedPart === "pants"
-                    ? `${product.name} (Pants)`
-                    : product.name,
+                handleAddToCart({
+                  id: `${product.id}-${selectedPart}`,
+                  name:
+                    selectedPart === "jacket"
+                      ? `${product.name} (Jacket)`
+                      : selectedPart === "pants"
+                      ? `${product.name} (Pants)`
+                      : product.name,
 
-                price: getPrice(), // ✅ correct price
-                image: product.image[0], // optional but cleaner
-                quantity,
-              });
-            }}
-              className="bg-black text-white py-3 rounded-xl"
+                  price: getPrice(),
+                  quantity,
+                  image: product.image[0],
+                  selectedPart,
+                  code: getCode(),
+                });
+              }}
+              className="bg-black text-white py-3 rounded-xl hover:cursor-pointer transition-colors duration-300 text-center font-medium"
             >
               Add to Cart
             </button>
 
-            {/* Cleaning */}
+            {/* CLEANING */}
             <div>
               <p className="font-medium">Cleaning:</p>
               <p className="text-sm text-gray-600 whitespace-pre-line">
@@ -157,6 +195,16 @@ export default function ProductModal({ product, onClose }) {
           </div>
         </div>
       </div>
+
+      {/* TOAST */}
+      <div
+        className={`fixed bottom-6 right-6 bg-black text-white px-4 py-2 rounded-lg shadow-lg z-50 transition-all duration-300 ${
+          showToast ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
+        }`}
+      >
+        Added to cart
+      </div>
+
     </div>
   );
 }

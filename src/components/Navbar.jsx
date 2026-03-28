@@ -25,12 +25,22 @@ export default function Navbar() {
     return () => { document.body.style.overflow = "auto"; };
   }, [mobileMenuOpen]);
 
+
+
   const handleScrollTo = (id) => (e) => {
-    e.preventDefault();
+  e.preventDefault();
+
+  if (window.location.pathname !== "/") {
+      // go to home with hash
+      window.location.href = `/#${id}`;
+      setMobileMenuOpen(false);
+      return;
+    }
+
+    // already on home = smooth scroll
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
     setMobileMenuOpen(false);
   };
-
   // Dropdown hover (desktop only)
   const handleDropdownEnter = () => !isMobile && setShopDropdownOpen(true);
   const handleDropdownLeave = () => !isMobile && setShopDropdownOpen(false);
