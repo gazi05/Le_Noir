@@ -1,6 +1,7 @@
 // Shop.jsx
 import { useParams } from "react-router-dom";
-import WomensShop from "./ShopeWomen";
+import WomensShop from "./ShopWomen";
+import MensShop from "./ShopMen";
 
 export default function Shop() {
   const { gender } = useParams();

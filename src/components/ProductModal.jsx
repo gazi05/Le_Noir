@@ -17,22 +17,47 @@ export default function ProductModal({ product, onClose }) {
     type: "success",
   });
 
+  const modalRef = useRef(null);
+
   const toastTimeout = useRef(null);
 
-  // safety
   if (!product) return null;
   if (!Array.isArray(product.image)) return null;
   if (!Array.isArray(product.sizes)) return null;
 
-  const isSet =
-    Array.isArray(product.category) &&
-    product.category.includes("set");
+  const isMultiItem =
+  Array.isArray(product.items) && product.items.length > 1;
 
-  // 🔥 FIX: decide measurement type based on selected part
+  const getSelectedItem = () => {
+    if (selectedPart === "full") return null;
+    return product.items?.find((item) => item.type === selectedPart);
+  };
+
+  const getPrice = () => {
+    const item = getSelectedItem();
+    return item ? item.price : product.price;
+  };
+
+  const getCode = () => {
+    const item = getSelectedItem();
+    return item ? item.code : "";
+  };
+
   const getMeasurementType = () => {
-    if (selectedPart === "jacket") return "jacket";
-    if (selectedPart === "pants") return "pants";
-    return null; // full set → no measurements
+    const item = getSelectedItem();
+
+    
+      if (item) {
+      if (item.type === "Jacket") return "Jacket";
+      if (item.type === "Pants") return "Pants";
+      if (item.type === "Skirt") return "Pants";
+      if (item.type === "Dress") return "Dress";
+      if (item.type === "Shirt") return "Tops";
+    }
+
+    if (product.category?.includes("Dress")) return "Dress";
+
+    return null;
   };
 
   const handleAddToCart = (item) => {
@@ -65,28 +90,21 @@ export default function ProductModal({ product, onClose }) {
     }, 2500);
   };
 
-  const getPrice = () => {
-    if (selectedPart === "jacket" && product.jacketPrice) {
-      return product.jacketPrice;
-    }
-    if (selectedPart === "pants" && product.pantsPrice) {
-      return product.pantsPrice;
-    }
-    return product.price || 0;
-  };
-
-  const getCode = () => {
-    if (selectedPart === "jacket") return product.jacketCode;
-    if (selectedPart === "pants") return product.pantsCode;
-    return product.dressCode || product.jacketCode || "";
-  };
+  const handleOutsideClick = (e) => {
+  if (modalRef.current && !modalRef.current.contains(e.target)) {
+    onClose();
+  }
+};
 
   const measurementType = getMeasurementType();
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/60 flex justify-center items-start overflow-y-auto p-4">
-
-      <div className="bg-white w-full max-w-5xl rounded-2xl shadow-2xl relative">
+    <div className="fixed inset-0 z-50 bg-black/60 flex justify-center items-start overflow-y-auto p-4" onClick={handleOutsideClick}>
+      <div
+          ref={modalRef}
+          className="bg-white w-full max-w-5xl rounded-2xl shadow-2xl relative"
+          onClick={(e) => e.stopPropagation()}
+        >
 
         {/* CLOSE */}
         <button
@@ -136,8 +154,8 @@ export default function ProductModal({ product, onClose }) {
               </p>
             )}
 
-            {/* SET OPTIONS */}
-            {isSet && (
+            {/* ITEMS */}
+            {isMultiItem&& (
               <div>
                 <p className="font-medium">Choose Item:</p>
 
@@ -156,37 +174,22 @@ export default function ProductModal({ product, onClose }) {
                     Full Set
                   </button>
 
-                  {product.jacketPrice && (
+                  {product.items?.map((item) => (
                     <button
+                      key={`${product.id}-${item.type}`}
                       onClick={() => {
-                        setSelectedPart("jacket");
+                        setSelectedPart(item.type);
                         setSelectedSize("");
                       }}
                       className={`px-3 py-1 border ${
-                        selectedPart === "jacket"
+                        selectedPart === item.type
                           ? "bg-black text-white"
                           : ""
                       }`}
                     >
-                      Jacket
+                      {item.type}
                     </button>
-                  )}
-
-                  {product.pantsPrice && (
-                    <button
-                      onClick={() => {
-                        setSelectedPart("pants");
-                        setSelectedSize("");
-                      }}
-                      className={`px-3 py-1 border ${
-                        selectedPart === "pants"
-                          ? "bg-black text-white"
-                          : ""
-                      }`}
-                    >
-                      Pants
-                    </button>
-                  )}
+                  ))}
                 </div>
               </div>
             )}
@@ -212,12 +215,14 @@ export default function ProductModal({ product, onClose }) {
               </div>
             </div>
 
-            {/* 🔥 MEASUREMENTS (FIXED LOGIC) */}
+            {/* MEASUREMENTS */}
             {measurementType &&
               selectedSize &&
               sizeChart?.[measurementType]?.[selectedSize] && (
                 <div className="text-sm text-gray-600 border-t pt-2">
-                  <p className="font-medium mb-1">Measurements:</p>
+                  <p className="font-medium mb-1">
+                    Measurements:
+                  </p>
 
                   {Object.entries(
                     sizeChart[measurementType][selectedSize]
@@ -256,12 +261,9 @@ export default function ProductModal({ product, onClose }) {
                 handleAddToCart({
                   id: `${product.id}-${selectedPart}-${selectedSize}`,
                   name:
-                    selectedPart === "jacket"
-                      ? `${product.name} (Jacket)`
-                      : selectedPart === "pants"
-                      ? `${product.name} (Pants)`
-                      : product.name,
-
+                    selectedPart === "full"
+                      ? product.name
+                      : `${product.name} (${selectedPart})`,
                   price: getPrice(),
                   quantity,
                   image: product.image[0],
@@ -292,7 +294,7 @@ export default function ProductModal({ product, onClose }) {
       {/* TOAST */}
       {toast.show && (
         <div
-          className={`fixed bottom-6 right-6 px-5 py-3 rounded-lg shadow-lg text-sm font-medium transition
+          className={`fixed bottom-6 right-6 px-5 py-3 rounded-lg shadow-lg text-sm font-medium
           ${toast.type === "success" ? "bg-green-600 text-white" : ""}
           ${toast.type === "warning" ? "bg-yellow-400 text-black" : ""}
           `}

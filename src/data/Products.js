@@ -18,17 +18,25 @@ export const products = [
     id: 1, 
     name: "Beige Linen Set", 
     price: 60, 
-    jacketPrice: 40,
-    pantsPrice: 20,
-    jacketCode : "3001/021/064",
-    pantsCode : "4001/021/064",
+
+    items: [
+      {
+        type: "Jacket",
+        price: 40,
+        code: "3001/021/064"
+      },
+      {
+        type: "Pants",
+        price: 20,
+        code: "4001/021/064"
+      }
+    ],
+
     image: [Beige_Linen_Jacket, Beige_Linen_Jacket2, Beige_Linen_Jacket3],
-    category: ["set", "jacket", "pants"],  
+    category: ["set", "Jacket", "Pants"],  
     gender: "women",
     color: ["beige"],
     material: "75% cotton, 25% wool",
-
-    type: "pants",
     sizes: ["XS", "S", "M", "L"],
 
     Cleaning: `
@@ -44,17 +52,25 @@ export const products = [
     id: 2, 
     name: "Saffron Satin Set", 
     price: 55,
-    jacketPrice: 30,
-    pantsPrice: 25,
-    jacketCode : "2001/027/044" , 
-    pantsCode : "4001/027/044" , 
+
+    items: [
+      {
+        type: "Shirt",
+        price: 30,
+        code: "2001/027/044"
+      },
+      {
+        type: "Pants",
+        price: 25,
+        code: "4001/027/044"
+      }
+    ],
+
     image: [saffron_set , saffron_set2],
-    category: ["set" , "jacket" , "pants"],  
+    category: ["set", "Shirt", "Pants"],  
     gender: "women",
     color: ["saffron"],
     material: "60% cotton, 40% polyester",
-
-    type: "tops",
     sizes: ["XS", "S", "M", "L"],
 
     Cleaning: ` 
@@ -70,14 +86,20 @@ export const products = [
     id: 3, 
     name: "Navy Satin Dress", 
     price: 40, 
-    dressCode : "1001/027/054" , 
+
+    items: [
+      {
+        type: "Dress",
+        price: 40,
+        code: "1001/027/054"
+      }
+    ],
+
     image: [navy_satin_dress , navy_satin_dress2 , navy_satin_dress3],
-    category: ["dress"], 
+    category: ["Dress"], 
     gender: "women",
     color: ["navy"],
     material: "75% cotton, 25% polyester",
-
-    type: "tops",
     sizes: ["XS", "S", "M", "L"],
 
     Cleaning: `
@@ -93,17 +115,25 @@ export const products = [
     id: 4 , 
     name : "White Cotton Set" ,
     price : 60 , 
-    jacketPrice: 35,
-    pantsPrice: 25,
-    jacketCode : "1201/033/051" ,
-    pantsCode : "8001/033/051" ,
+
+    items: [
+      {
+        type: "Jacket",   // changed from jacket
+        price: 35,
+        code: "1201/033/051"
+      },
+      {
+        type: "Skirt",   // changed from pants
+        price: 25,
+        code: "8001/033/051"
+      }
+    ],
+
     image : [White_cotton_set, White_cotton_set2 , White_cotton_set3], 
-    category : ["set" , "jacket" , "pants"] ,  
+    category : ["set", "Jacket", "Skirt"],  
     gender: "women",
     color: ["white"],
     material : "30% cotton, 70% polyester",
-
-    type: "jackets",
     sizes: ["XS", "S", "M", "L"],
 
     Cleaning : `
@@ -118,10 +148,9 @@ export const products = [
 
 export const getProductsByCategory = (category) => {
   if (!category || category === 'all') return products;
-  return products.filter(product => 
-    Array.isArray(product.category) 
-      ? product.category.includes(category)
-      : product.category === category
+
+  return products.filter(product =>
+    product.category.includes(category)
   );
 };
 
