@@ -85,7 +85,7 @@ export default function Footer() {
             <div className="flex gap-6 mt-4">
 
               <a
-                href="https://instagram.com/YOURBRAND"
+                href="https://instagram.com/lenoir.officiall"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-primary transition-colors"
@@ -94,7 +94,7 @@ export default function Footer() {
               </a>
 
               <a
-                href="https://wa.me/YOURNUMBER"
+                href="https://wa.me/962777732452"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-primary transition-colors"
@@ -103,7 +103,7 @@ export default function Footer() {
               </a>
 
               <a
-                href="mailto:your@email.com"
+                href="mailto:mwaleed.london24@gmail.com"
                 className="hover:text-primary transition-colors"
               >
                 <Mail size={20} />
