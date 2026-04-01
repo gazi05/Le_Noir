@@ -26,10 +26,12 @@ export default function Home() {
   }, [location]);
 
   return (
-    <div className="min-h-screen bg-zinc-50 text-foreground">
+    <div id="top" className="min-h-screen bg-zinc-50 text-foreground">
       
       <Hero />
-      <Collection />
+      <div id="collection">
+        <Collection />
+      </div>
       <BrandStatement />
       <div id="about">
         <About />
@@ -37,6 +39,7 @@ export default function Home() {
       <div id="contact">
         <DirectContactCTA />
       </div>
+      
 
       <Footer />
 

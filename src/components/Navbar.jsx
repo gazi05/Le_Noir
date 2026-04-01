@@ -167,10 +167,10 @@ export default function Navbar() {
               Customize
             </Link>
 
-            <NavLink href="#about" onClick={handleScrollTo("about")}>
+            <NavLink  onClick={handleScrollTo("about")}>
               About
             </NavLink>
-            <NavLink href="#contact" onClick={handleScrollTo("contact")}>
+            <NavLink  onClick={handleScrollTo("contact")}>
               Contact
             </NavLink>
           </div>
@@ -179,6 +179,7 @@ export default function Navbar() {
         {/* Logo */}
         <Link
           to="/"
+          onClick={handleScrollTo("top")}
           className={`${
             isMobile ? "mx-auto" : "absolute left-1/2 -translate-x-1/2"
           } text-xl sm:text-2xl md:text-3xl font-serif tracking-[0.3em] uppercase font-bold hover:text-white/80 transition-all duration-300 cursor-pointer`}
@@ -231,7 +232,6 @@ export default function Navbar() {
           </Link>
 
           <a
-            href="#about"
             onClick={handleScrollTo("about")}
             className="text-lg font-serif tracking-wide hover:text-white/80 transition-colors py-3 px-4 hover:bg-white/10 rounded-lg"
           >
@@ -239,7 +239,6 @@ export default function Navbar() {
           </a>
 
           <a
-            href="#contact"
             onClick={handleScrollTo("contact")}
             className="text-lg font-serif tracking-wide hover:text-white/80 transition-colors py-3 px-4 hover:bg-white/10 rounded-lg"
           >

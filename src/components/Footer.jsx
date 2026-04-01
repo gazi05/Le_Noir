@@ -1,7 +1,23 @@
 import { motion } from "framer-motion";
 import { Instagram, Phone, Mail } from "lucide-react";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export default function Footer() {
+
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleScrollTo = (id) => (e) => {
+    e.preventDefault();
+
+    if (location.pathname !== "/") {
+      navigate(`/#${id}`);
+      return;
+    }
+
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  };
   return (
     <footer className="bg-background text-foreground border-t border-foreground/10">
       <div className="max-w-7xl mx-auto px-6 py-20">
@@ -39,26 +55,29 @@ export default function Footer() {
           >
             <nav className="flex flex-col gap-4 text-sm tracking-widest uppercase">
 
-              <a
-                href="#collection"
-                className="hover:text-primary transition-colors"
-              >
-                Collection
-              </a>
+            <a
+              href="#collection"
+              onClick={handleScrollTo("collection")}
+              className="hover:text-primary transition-colors"
+            >
+              Collection
+            </a>
 
-              <a
-                href="#about"
-                className="hover:text-primary transition-colors"
-              >
-                About
-              </a>
+            <a
+              href="#about"
+              onClick={handleScrollTo("about")}
+              className="hover:text-primary transition-colors"
+            >
+              About
+            </a>
 
-              <a
-                href="#contact"
-                className="hover:text-primary transition-colors"
-              >
-                Contact
-              </a>
+            <a
+              href="#contact"
+              onClick={handleScrollTo("contact")}
+              className="hover:text-primary transition-colors"
+            >
+              Contact
+            </a>
 
             </nav>
 

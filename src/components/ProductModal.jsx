@@ -91,10 +91,10 @@ export default function ProductModal({ product, onClose }) {
   };
 
   const handleOutsideClick = (e) => {
-  if (modalRef.current && !modalRef.current.contains(e.target)) {
+    if (modalRef.current && !modalRef.current.contains(e.target)) {
     onClose();
-  }
-};
+    }
+  };
 
   const measurementType = getMeasurementType();
 
